@@ -2,6 +2,8 @@
 
 #include <stdlib.h>
 
+#include "raymath.h"
+
 object_t *object_create(const char *model_path, const Vector3 position) {
     object_t *object = malloc(sizeof(object_t));
     if (object == NULL) {
@@ -10,12 +12,17 @@ object_t *object_create(const char *model_path, const Vector3 position) {
 
     object->model = LoadModel(model_path);
     object->position = position;
-    object->bounds = GetMeshBoundingBox(object->model.meshes[0]);
+    object->bounds = GetModelBoundingBox(object->model);
+    object->_model_bounding_box = object->bounds;
 
     return object;
 }
 
-void object_render(const object_t *object) {
+void object_render(object_t *object) {
+    object->bounds = (BoundingBox){
+        Vector3Add(object->_model_bounding_box.min, object->position),
+        Vector3Add(object->_model_bounding_box.max, object->position)
+    };
     DrawModel(object->model, object->position, 1.0f, WHITE);
     DrawBoundingBox(object->bounds, YELLOW);
 }

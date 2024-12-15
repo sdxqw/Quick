@@ -1,5 +1,6 @@
 #pragma once
 #include "camera.h"
+#include "gun.h"
 #include "raylib.h"
 
 typedef struct {
@@ -8,6 +9,7 @@ typedef struct {
     float speed;
     float sprint_speed;
     bool is_moving;
+    gun_t *gun;
 } player_t;
 
 player_t *player_create();

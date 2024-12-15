@@ -24,7 +24,7 @@ camera_3d_t *camera_3d_create() {
         .projection = CAMERA_PERSPECTIVE,
     };
 
-    camera->camera_mode = CAMERA_FREE;
+    camera->camera_mode = CAMERA_FIRST_PERSON;
     camera->pitch = 0.0f;
     camera->yaw = 0.0f;
     camera->camera_sensitivity = 0.15f;

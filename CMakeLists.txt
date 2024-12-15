@@ -32,6 +32,8 @@ add_executable(Quick src/main.c
         src/engine/object.h
         src/engine/object.c
         src/engine/player.h
-        src/engine/player.c)
+        src/engine/player.c
+        src/engine/gun.h
+        src/engine/gun.c)
 
 target_link_libraries(Quick PUBLIC raylib cglm)

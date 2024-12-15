@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "raymath.h"
+
 world_t *create_world(const int screen_width, const int screen_height) {
     world_t *world = malloc(sizeof(world_t));
     if (world == NULL) {
@@ -57,10 +59,14 @@ void remove_object_from_world(world_t *world, const int index) {
 void update_world(const world_t *world) {
     for (int i = 0; i < world->object_count; i++) {
         if (object_check_collision_with_player(world->objects[i], world->player)) {
-            // stop the player from moving
-            printf("Collision with object %d\n", i);
+            // Adjust player's position to prevent it from moving inside the object
+            Vector3 penetration = Vector3Subtract(world->player->position, world->objects[i]->position);
+            penetration = Vector3Normalize(penetration);
+            penetration = Vector3Scale(penetration, 0.1f); // Adjust the scale as needed
+            world->player->position = Vector3Add(world->player->position, penetration);
         }
     }
+
 
     player_update(world->player, world->camera);
 }
