@@ -10,7 +10,7 @@ player_t *player_create() {
 
     player->position = (Vector3){0.0f, 1.0f, 0.0f};
     player->bounds = (BoundingBox){
-        (Vector3){player->position.x - 0.5f, player->position.y - 1.0f, player->position.z - 0.5f},
+        (Vector3){player->position.x - 0.5f, 0, player->position.z - 0.5f},
         (Vector3){player->position.x + 0.5f, player->position.y + 1.0f, player->position.z + 0.5f}
     };
 
@@ -57,7 +57,7 @@ void player_update(player_t *player, camera_3d_t *camera) {
     camera_update(camera, player->position, player->is_moving, is_sprinting);
     // Update bounding box with player position
     player->bounds = (BoundingBox){
-        (Vector3){player->position.x - 0.5f, player->position.y - 1.0f, player->position.z - 0.5f},
+        (Vector3){player->position.x - 0.5f, 0, player->position.z - 0.5f},
         (Vector3){player->position.x + 0.5f, player->position.y + 1.0f, player->position.z + 0.5f}
     };
 }
