@@ -1,8 +1,9 @@
 #include "world.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 
-world_t *create_world(int screen_width, int screen_height) {
+world_t *create_world(const int screen_width, const int screen_height) {
     world_t *world = malloc(sizeof(world_t));
     if (world == NULL) {
         return NULL;
@@ -54,7 +55,14 @@ void remove_object_from_world(world_t *world, const int index) {
 
 
 void update_world(const world_t *world) {
-    player_update(world->player);
+    for (int i = 0; i < world->object_count; i++) {
+        if (object_check_collision_with_player(world->objects[i], world->player)) {
+            // stop the player from moving
+            printf("Collision with object %d\n", i);
+        }
+    }
+
+    player_update(world->player, world->camera);
 }
 
 void render_world(const world_t *world) {
@@ -62,12 +70,14 @@ void render_world(const world_t *world) {
     ClearBackground(BLACK);
 
     BeginMode3D(world->camera->camera);
+    player_render(world->player);
 
     for (int i = 0; i < world->object_count; i++) {
         object_render(world->objects[i]);
     }
 
-    DrawGrid(100, 1.0f);
+    // draw a flat plane
+    DrawPlane((Vector3){0.0f, 0.0f, 0.0f}, (Vector2){60.0f, 60.0f}, GREEN);
     EndMode3D();
 
 

@@ -4,14 +4,16 @@
 
 typedef struct {
     Vector3 position;
+    BoundingBox bounds;
     float speed;
-    float vertical_speed;
-    float headbob_timer;
     float sprint_speed;
-    camera_3d_t *camera;
+    bool is_moving;
 } player_t;
 
-player_t *player_create(camera_3d_t *camera);
-void player_update(player_t *player);
+player_t *player_create();
+
+void player_update(player_t *player, camera_3d_t *camera);
+
+void player_render(const player_t *player);
 
 void player_destroy(player_t *player);

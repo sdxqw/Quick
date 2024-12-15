@@ -29,8 +29,6 @@ add_executable(Quick src/main.c
         src/engine/camera.c
         src/engine/world.h
         src/engine/world.c
-        src/engine/terrain.h
-        src/engine/terrain.c
         src/engine/object.h
         src/engine/object.c
         src/engine/player.h

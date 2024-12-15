@@ -17,10 +17,15 @@ object_t *object_create(const char *model_path, const Vector3 position) {
 
 void object_render(const object_t *object) {
     DrawModel(object->model, object->position, 1.0f, WHITE);
+    DrawBoundingBox(object->bounds, YELLOW);
 }
 
 bool object_check_collision(const object_t *object, const object_t *other) {
     return CheckCollisionBoxes(object->bounds, other->bounds);
+}
+
+bool object_check_collision_with_player(const object_t *object, const player_t *player) {
+    return CheckCollisionBoxes(object->bounds, player->bounds);
 }
 
 void object_destroy(object_t *object) {

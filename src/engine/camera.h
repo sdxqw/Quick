@@ -11,10 +11,11 @@ typedef struct {
     float pitch;
     float yaw;
     float camera_sensitivity;
-
+    float headbob_timer;
 } camera_3d_t;
 
 camera_3d_t *camera_3d_create();
 
-void camera_update_position(camera_3d_t *camera, Vector3 position, float headbob_offset);
+void camera_update(camera_3d_t *camera, Vector3 player_position, bool is_moving, bool is_sprinting);
+
 void camera_destroy(camera_3d_t *camera);

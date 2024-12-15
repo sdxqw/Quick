@@ -3,7 +3,6 @@
 #include "object.h"
 #include "player.h"
 
-
 typedef struct {
     camera_3d_t *camera;
     player_t *player;
